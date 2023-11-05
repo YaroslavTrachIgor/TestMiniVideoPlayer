@@ -21,15 +21,18 @@ private enum Constants {
 protocol VideosListTableViewControllerProtocol: BaseTableViewControllerProtocol {
     func updateRows(_ newRows: [VideoCellUIModel])
     func presentErrorAlert(with errorDescription: String)
+    func presentFullScreenPlayer(for row: Int)
+    func endRefreshingControl()
 }
 
 
 //MARK: - Main TableViewController
 final class VideosListTableViewController: UITableViewController {
         
-    var presenter: BasePresenterProtocol?
+    var presenter: BaseSelectableListPresenterProtocol?
     
     //MARK: Private
+    private let videosRefreshControl = UIRefreshControl()
     private var rows = [VideoCellUIModel]()
     
     
@@ -68,14 +71,12 @@ final class VideosListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let videoURL = rows[indexPath.row].url
-        guard let videoURL = videoURL else { return }
-        let player = AVPlayer(url: videoURL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        present(playerViewController, animated: true) {
-            playerViewController.player?.play()
-        }
+        presenter?.onDidSelect(for: indexPath.row)
+    }
+    
+    //MARK: @objc
+    @objc func refreshTableView() {
+        presenter?.onRefreshList()
     }
 }
 
@@ -85,6 +86,7 @@ extension VideosListTableViewController: VideosListTableViewControllerProtocol {
 
     //MARK: Internal
     func setupMainUI() {
+        setupRefreshControl()
         setupTableView()
         title = Constants.title
     }
@@ -97,8 +99,23 @@ extension VideosListTableViewController: VideosListTableViewControllerProtocol {
         self.rows = newRows
     }
     
+    internal func endRefreshingControl() {
+        videosRefreshControl.endRefreshing()
+    }
+    
     internal func presentErrorAlert(with errorDescription: String) {
         AlertManager.presentError(message: errorDescription, on: self)
+    }
+    
+    internal func presentFullScreenPlayer(for row: Int) {
+        let videoURL = rows[row].url
+        guard let videoURL = videoURL else { return }
+        let player = AVPlayer(url: videoURL)
+        let playerViewController = AVPlayerViewController()
+        playerViewController.player = player
+        present(playerViewController, animated: true) {
+            playerViewController.player?.play()
+        }
     }
 }
 
@@ -113,5 +130,10 @@ private extension VideosListTableViewController {
         tableView.register(cellNib, forCellReuseIdentifier: cellKey)
         tableView.separatorColor = .clear
         tableView.rowHeight = 270
+        tableView.refreshControl = videosRefreshControl
+    }
+    
+    func setupRefreshControl() {
+        videosRefreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
     }
 }

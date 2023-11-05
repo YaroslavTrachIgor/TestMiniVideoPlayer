@@ -33,6 +33,8 @@
 		CE7B03412AF7120400AA366B /* BaseViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B03402AF7120400AA366B /* BaseViewControllerProtocol.swift */; };
 		CE7B03432AF7121300AA366B /* BasePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B03422AF7121300AA366B /* BasePresenterProtocol.swift */; };
 		CE7B03452AF71BAE00AA366B /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B03442AF71BAE00AA366B /* AlertManager.swift */; };
+		CE7B034B2AF852CC00AA366B /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B034A2AF852CC00AA366B /* MainBuilder.swift */; };
+		CE7B034D2AF8530100AA366B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B034C2AF8530100AA366B /* MainCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +66,8 @@
 		CE7B03402AF7120400AA366B /* BaseViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewControllerProtocol.swift; sourceTree = "<group>"; };
 		CE7B03422AF7121300AA366B /* BasePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasePresenterProtocol.swift; sourceTree = "<group>"; };
 		CE7B03442AF71BAE00AA366B /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
+		CE7B034A2AF852CC00AA366B /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
+		CE7B034C2AF8530100AA366B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +166,8 @@
 		CE7B03002AF5DE3800AA366B /* Router */ = {
 			isa = PBXGroup;
 			children = (
+				CE7B03482AF8524A00AA366B /* Coordinator */,
+				CE7B03492AF8525200AA366B /* Builder */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -247,6 +253,22 @@
 			path = Classes;
 			sourceTree = "<group>";
 		};
+		CE7B03482AF8524A00AA366B /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				CE7B034C2AF8530100AA366B /* MainCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		CE7B03492AF8525200AA366B /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				CE7B034A2AF852CC00AA366B /* MainBuilder.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -328,12 +350,14 @@
 				CE7B03452AF71BAE00AA366B /* AlertManager.swift in Sources */,
 				CE7B02E82AF5DDCB00AA366B /* AppDelegate.swift in Sources */,
 				CE7B03202AF5E1E900AA366B /* VideosListAPIClient.swift in Sources */,
+				CE7B034D2AF8530100AA366B /* MainCoordinator.swift in Sources */,
 				CE7B03082AF5DEC500AA366B /* FoundationExtensions.swift in Sources */,
 				CE7B03132AF5DF8600AA366B /* VideosListTableViewController.swift in Sources */,
 				CE7B03042AF5DE9900AA366B /* BaseCellUIModel.swift in Sources */,
 				CE7B033B2AF6D9F200AA366B /* VideoTableViewCell.swift in Sources */,
 				CE7B030F2AF5DF2600AA366B /* JSONHelper.swift in Sources */,
 				CE7B03412AF7120400AA366B /* BaseViewControllerProtocol.swift in Sources */,
+				CE7B034B2AF852CC00AA366B /* MainBuilder.swift in Sources */,
 				CE7B03062AF5DEB000AA366B /* UIExtensions.swift in Sources */,
 				CE7B02EA2AF5DDCB00AA366B /* SceneDelegate.swift in Sources */,
 				CE7B03432AF7121300AA366B /* BasePresenterProtocol.swift in Sources */,

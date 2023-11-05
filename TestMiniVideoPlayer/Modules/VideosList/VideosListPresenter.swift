@@ -12,10 +12,10 @@ private extension VideosListPresenter {
     
     //MARK: Private
     enum Constants {
-        enum ErrorMessage {
+        enum ErrorState {
             
             //MARK: Static
-            static let basicMessage = "Error fetching GitHub Users Data:"
+            static let baseMessage = "Error fetching Videos list Data. Swipe down to reload Table or Check your WiFi Connection."
         }
     }
 }
@@ -30,15 +30,15 @@ final class VideosListPresenter {
     
     
     //MARK: Initialization
-    init(view: VideosListTableViewControllerProtocol) {
+    init(view: VideosListTableViewControllerProtocol, apiClient: VideosListAPIClientProtocol) {
         self.view = view
-        self.apiClient = VideosListAPIClient(url: URL(string: URLs.videosListURL))
+        self.apiClient = apiClient
     }
 }
 
 
 //MARK: - Presenter protocol extension
-extension VideosListPresenter: BasePresenterProtocol {
+extension VideosListPresenter: BaseSelectableListPresenterProtocol {
     
     //MARK: Internal
     internal func onViewDidLoad() {
@@ -46,6 +46,17 @@ extension VideosListPresenter: BasePresenterProtocol {
         fetchVideos { [weak self] videos in
             self?.reloadTableView(with: videos)
         }
+    }
+    
+    internal func onRefreshList() {
+        fetchVideos { [weak self] videos in
+            self?.reloadTableView(with: videos)
+        }
+        view?.endRefreshingControl()
+    }
+    
+    internal func onDidSelect(for row: Int) {
+        view?.presentFullScreenPlayer(for: row)
     }
 }
 
@@ -58,16 +69,13 @@ private extension VideosListPresenter {
         Task {
             do {
                 let dbModels = try await apiClient?.getVideos()
-                print(dbModels?.count ?? 0)
                 DispatchQueue.main.async {
                     completion(dbModels ?? [])
                 }
             } catch {
-                print(Constants.ErrorMessage.basicMessage)
-                print(error)
                 DispatchQueue.main.async {
-                    self.view?.presentErrorAlert(with: error.localizedDescription)
                     completion([])
+                    self.view?.presentErrorAlert(with: Constants.ErrorState.baseMessage)
                 }
             }
         }
@@ -79,9 +87,4 @@ private extension VideosListPresenter {
     }
 }
 
-
-//ADD ERROR HANDLING CODE
-
-//ADD COORDINATOR
-
-//ADD SEARCH
+//ADD Unit Tests

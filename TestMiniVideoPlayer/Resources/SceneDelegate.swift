@@ -16,11 +16,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let rootViewController = VideosListTableViewController()
-        let presenter = VideosListPresenter(view: rootViewController)
-        rootViewController.presenter = presenter
-        let navigationController = UINavigationController(rootViewController: rootViewController)
+        let navigationController = UINavigationController()
         navigationController.navigationBar.prefersLargeTitles = true
+        let router = MainCoordinator(navigationController: navigationController)
+        router.start()
         
         window?.rootViewController = navigationController
         window?.makeKeyAndVisible()

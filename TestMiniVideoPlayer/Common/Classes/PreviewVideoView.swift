@@ -24,7 +24,8 @@ public class PreviewVideoView: UIView {
     }
     
     //MARK: Public
-    func configurePlayer(with url: URL) {
+    func configurePlayer(with url: URL!) {
+        guard let url = url else { return }
         player = AVPlayer(url: url)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspectFill

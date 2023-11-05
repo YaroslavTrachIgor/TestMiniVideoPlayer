@@ -10,3 +10,11 @@ import Foundation
 protocol BasePresenterProtocol {
     func onViewDidLoad()
 }
+
+protocol BaseListPresenterProtocol: BasePresenterProtocol {
+    func onRefreshList()
+}
+
+protocol BaseSelectableListPresenterProtocol: BaseListPresenterProtocol {
+    func onDidSelect(for row: Int)
+}

@@ -8,11 +8,11 @@
 import Foundation
 
 struct Video: Codable {
-    let description: String
-    let sources: [String]
-    let subtitle: String
-    let thumb: String
-    let title: String
+    let description: String!
+    let sources: [String]!
+    let subtitle: String!
+    let thumb: String!
+    let title: String!
 }
 
 struct Category: Codable {
