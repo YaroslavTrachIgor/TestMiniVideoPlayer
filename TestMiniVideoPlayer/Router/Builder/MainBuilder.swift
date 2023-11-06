@@ -11,7 +11,8 @@ import UIKit
 //MARK: - Main Bulder protocol
 protocol Builder {
     init(coordinator: MainCoordinator!)
-    func showList() -> UIViewController
+    func showList(delegate: VideosListPresenterCoordinatorDelegate?) -> UIViewController
+    func showDetail(with url: URL?) -> UIViewController
 }
 
 
@@ -33,13 +34,20 @@ final class MainBuilder {
 extension MainBuilder: Builder {
     
     //MARK: Internal
-    internal func showList() -> UIViewController {
+    internal func showList(delegate: VideosListPresenterCoordinatorDelegate?) -> UIViewController {
         let videosListURL = URL(string: URLs.videosListURL)
         let videosListVC = VideosListTableViewController()
         let videosListAPIClient = VideosListAPIClient(url: videosListURL)
-        let presenter = VideosListPresenter(view: videosListVC, apiClient: videosListAPIClient)
+        let presenter = VideosListPresenter(view: videosListVC, apiClient: videosListAPIClient, delegate: delegate)
         videosListVC.presenter = presenter
         return videosListVC
+    }
+    
+    internal func showDetail(with url: URL?) -> UIViewController {
+        let detailVideoVC = DetailVideoViewController()
+        let presenter = DetailVideoPresenter(view: detailVideoVC, videoURL: url)
+        detailVideoVC.presenter = presenter
+        return detailVideoVC
     }
 }
 

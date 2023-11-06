@@ -35,6 +35,8 @@
 		CE7B03452AF71BAE00AA366B /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B03442AF71BAE00AA366B /* AlertManager.swift */; };
 		CE7B034B2AF852CC00AA366B /* MainBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B034A2AF852CC00AA366B /* MainBuilder.swift */; };
 		CE7B034D2AF8530100AA366B /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B034C2AF8530100AA366B /* MainCoordinator.swift */; };
+		CE7B03732AF965FA00AA366B /* DetailVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B03722AF965FA00AA366B /* DetailVideoViewController.swift */; };
+		CE7B03752AF9661900AA366B /* DetailVideoPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE7B03742AF9661900AA366B /* DetailVideoPresenter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +70,8 @@
 		CE7B03442AF71BAE00AA366B /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		CE7B034A2AF852CC00AA366B /* MainBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainBuilder.swift; sourceTree = "<group>"; };
 		CE7B034C2AF8530100AA366B /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		CE7B03722AF965FA00AA366B /* DetailVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVideoViewController.swift; sourceTree = "<group>"; };
+		CE7B03742AF9661900AA366B /* DetailVideoPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVideoPresenter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				CE7B03102AF5DF6900AA366B /* VideosList */,
+				CE7B03712AF965E800AA366B /* DetailVideo */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -269,6 +274,15 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		CE7B03712AF965E800AA366B /* DetailVideo */ = {
+			isa = PBXGroup;
+			children = (
+				CE7B03722AF965FA00AA366B /* DetailVideoViewController.swift */,
+				CE7B03742AF9661900AA366B /* DetailVideoPresenter.swift */,
+			);
+			path = DetailVideo;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -345,9 +359,11 @@
 				CE7B030D2AF5DF1700AA366B /* APIHelper.swift in Sources */,
 				CE7B033F2AF6F10700AA366B /* PreviewVideoView.swift in Sources */,
 				CE7B02EC2AF5DDCB00AA366B /* ViewController.swift in Sources */,
+				CE7B03732AF965FA00AA366B /* DetailVideoViewController.swift in Sources */,
 				CE7B031A2AF5E10B00AA366B /* VideoCellUIModel.swift in Sources */,
 				CE7B03222AF5E20900AA366B /* URLs.swift in Sources */,
 				CE7B03452AF71BAE00AA366B /* AlertManager.swift in Sources */,
+				CE7B03752AF9661900AA366B /* DetailVideoPresenter.swift in Sources */,
 				CE7B02E82AF5DDCB00AA366B /* AppDelegate.swift in Sources */,
 				CE7B03202AF5E1E900AA366B /* VideosListAPIClient.swift in Sources */,
 				CE7B034D2AF8530100AA366B /* MainCoordinator.swift in Sources */,

@@ -21,7 +21,6 @@ private enum Constants {
 protocol VideosListTableViewControllerProtocol: BaseTableViewControllerProtocol {
     func updateRows(_ newRows: [VideoCellUIModel])
     func presentErrorAlert(with errorDescription: String)
-    func presentFullScreenPlayer(for row: Int)
     func endRefreshingControl()
 }
 
@@ -71,7 +70,7 @@ final class VideosListTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.onDidSelect(for: indexPath.row)
+        presenter?.onDidSelect(for: rows[indexPath.row].url)
     }
     
     //MARK: @objc
@@ -105,17 +104,6 @@ extension VideosListTableViewController: VideosListTableViewControllerProtocol {
     
     internal func presentErrorAlert(with errorDescription: String) {
         AlertManager.presentError(message: errorDescription, on: self)
-    }
-    
-    internal func presentFullScreenPlayer(for row: Int) {
-        let videoURL = rows[row].url
-        guard let videoURL = videoURL else { return }
-        let player = AVPlayer(url: videoURL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        present(playerViewController, animated: true) {
-            playerViewController.player?.play()
-        }
     }
 }
 

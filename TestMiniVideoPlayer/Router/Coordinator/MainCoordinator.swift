@@ -40,7 +40,22 @@ extension MainCoordinator: MainCoordinatorProtocol {
     
     //MARK: Internal
     internal func start() {
-        let rootVC = builder?.showList()
+        let rootVC = builder?.showList(delegate: self)
         navigationController.pushViewController(rootVC!, animated: true)
+    }
+    
+    internal func goToDetail(with url: URL?) {
+        let detailVC = builder?.showDetail(with: url)
+        navigationController.pushViewController(detailVC!, animated: true)
+    }
+}
+
+
+//MARK: - VideosList Delegate protocol extension
+extension MainCoordinator: VideosListPresenterCoordinatorDelegate {
+    
+    //MARK: Internal
+    func presenter(_ presenter: BaseSelectableListPresenterProtocol?, onGoToFullScreen withURL: URL?) {
+        goToDetail(with: withURL)
     }
 }

@@ -21,18 +21,27 @@ private extension VideosListPresenter {
 }
 
 
+//MARK: - Presenter Coordinator Delegate protocol
+protocol VideosListPresenterCoordinatorDelegate: AnyObject {
+    func presenter(_ presenter: BaseSelectableListPresenterProtocol?, onGoToFullScreen withURL: URL?)
+}
+
+
+
 //MARK: - Main Presenter
 final class VideosListPresenter {
     
     //MARK: Private
     private var apiClient: VideosListAPIClientProtocol?
+    private var delegate: VideosListPresenterCoordinatorDelegate?
     private weak var view: VideosListTableViewControllerProtocol?
     
     
     //MARK: Initialization
-    init(view: VideosListTableViewControllerProtocol, apiClient: VideosListAPIClientProtocol) {
+    init(view: VideosListTableViewControllerProtocol?, apiClient: VideosListAPIClientProtocol?, delegate: VideosListPresenterCoordinatorDelegate?) {
         self.view = view
         self.apiClient = apiClient
+        self.delegate = delegate
     }
 }
 
@@ -41,22 +50,23 @@ final class VideosListPresenter {
 extension VideosListPresenter: BaseSelectableListPresenterProtocol {
     
     //MARK: Internal
-    internal func onViewDidLoad() {
+    func onViewDidLoad() {
         view?.setupMainUI()
         fetchVideos { [weak self] videos in
             self?.reloadTableView(with: videos)
         }
     }
     
-    internal func onRefreshList() {
+    func onRefreshList() {
         fetchVideos { [weak self] videos in
             self?.reloadTableView(with: videos)
         }
         view?.endRefreshingControl()
     }
     
-    internal func onDidSelect(for row: Int) {
-        view?.presentFullScreenPlayer(for: row)
+    func onDidSelect(for url: URL?) {
+        guard let url = url else { return }
+        delegate?.presenter(self, onGoToFullScreen: url)
     }
 }
 
@@ -86,5 +96,3 @@ private extension VideosListPresenter {
         view?.reloadTableView()
     }
 }
-
-//ADD Unit Tests

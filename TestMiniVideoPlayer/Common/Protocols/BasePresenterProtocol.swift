@@ -16,5 +16,5 @@ protocol BaseListPresenterProtocol: BasePresenterProtocol {
 }
 
 protocol BaseSelectableListPresenterProtocol: BaseListPresenterProtocol {
-    func onDidSelect(for row: Int)
+    func onDidSelect(for url: URL?)
 }
